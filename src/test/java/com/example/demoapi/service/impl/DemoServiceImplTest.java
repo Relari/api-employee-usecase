@@ -2,6 +2,7 @@ package com.example.demoapi.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
@@ -82,6 +83,19 @@ class DemoServiceImplTest {
 
         assertEquals(demo.getId(), demoEntity.getId());
         assertEquals(demo.getDescription(), demoEntity.getDescription());
+
+    }
+
+    @Test
+    void findDemoError() {
+
+        when(demoRepository.findById(anyInt()))
+                .thenReturn(Optional.empty());
+
+        assertThrows(
+                RuntimeException.class,
+                () -> demoService.findDemo(1)
+        );
 
     }
 
