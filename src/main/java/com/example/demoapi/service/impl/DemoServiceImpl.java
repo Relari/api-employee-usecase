@@ -10,6 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class: DemoServiceImpl.
+ * @version 1.0.0
+ * @author Relari
+ */
+
 @Slf4j
 @Service
 @AllArgsConstructor

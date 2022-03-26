@@ -11,6 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Class: DemoEntity.
+ * @version 1.0.0
+ * @author Relari
+ */
+
 @Entity
 @Table(name = "Demo")
 
