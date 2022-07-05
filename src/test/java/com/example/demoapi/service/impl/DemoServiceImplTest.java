@@ -7,6 +7,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
+import com.example.demoapi.exception.DemoNotFoundException;
 import com.example.demoapi.model.Demo;
 import com.example.demoapi.model.DemoEntity;
 import com.example.demoapi.repository.DemoRepository;
@@ -104,11 +105,26 @@ class DemoServiceImplTest {
 
         var demoEntity = new DemoEntity(1, "Demo 1");
 
+        when(demoRepository.findById(anyInt()))
+                .thenReturn(Optional.of(demoEntity));
+
         demoRepository.deleteById(anyInt());
 
         demoService.deleteDemo(1);
 
         assertNotNull(demoEntity);
 
+    }
+
+    @Test
+    void deleteDemoError() {
+
+        when(demoRepository.findById(anyInt()))
+                .thenReturn(Optional.empty());
+
+        assertThrows(
+                DemoNotFoundException.class,
+                () -> demoService.deleteDemo(1)
+        );
     }
 }

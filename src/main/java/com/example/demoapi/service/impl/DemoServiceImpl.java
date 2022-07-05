@@ -52,6 +52,10 @@ public class DemoServiceImpl implements DemoService {
 
     public void deleteDemo(Integer id) {
         log.debug("Delete Demo By Id = {}", id);
-        demoRepository.deleteById(id);
+
+        Demo demo = findDemo(id);
+
+        demoRepository.deleteById(demo.getId());
+
     }
 }
