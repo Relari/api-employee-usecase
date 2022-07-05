@@ -1,5 +1,6 @@
 package com.example.demoapi.service.impl;
 
+import com.example.demoapi.exception.DemoNotFoundException;
 import com.example.demoapi.model.Demo;
 import com.example.demoapi.model.DemoEntity;
 import com.example.demoapi.repository.DemoRepository;
@@ -46,7 +47,7 @@ public class DemoServiceImpl implements DemoService {
         log.debug("Find Demo By Id = {}", id);
         return demoRepository.findById(id)
                 .map(this::mapDemo)
-                .orElseThrow(() -> new RuntimeException("Demo Not Found"));
+                .orElseThrow(() -> new DemoNotFoundException("Demo Not Found"));
     }
 
     public void deleteDemo(Integer id) {
