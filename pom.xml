@@ -65,6 +65,9 @@
                 <version>0.8.5</version>
                 <configuration>
                     <excludes>
+
+                        <exclude>/com/example/demoapi/exception/**</exclude>
+                        <exclude>/com/example/demoapi/interceptor/**</exclude>
                         <exclude>/com/example/demoapi/model/**</exclude>
                         <exclude>/com/example/demoapi/DemoApiApplication.*</exclude>
                     </excludes>

@@ -1,6 +1,6 @@
 package com.example.demoapi.service;
 
-import com.example.demoapi.model.Demo;
+import com.example.demoapi.model.domain.Demo;
 
 import java.util.List;
 

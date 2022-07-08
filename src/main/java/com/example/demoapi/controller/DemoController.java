@@ -1,6 +1,6 @@
 package com.example.demoapi.controller;
 
-import com.example.demoapi.model.Demo;
+import com.example.demoapi.model.domain.Demo;
 import com.example.demoapi.service.DemoService;
 import java.util.List;
 import lombok.AllArgsConstructor;

@@ -8,8 +8,8 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
 import com.example.demoapi.exception.DemoNotFoundException;
-import com.example.demoapi.model.Demo;
-import com.example.demoapi.model.DemoEntity;
+import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.entity.DemoEntity;
 import com.example.demoapi.repository.DemoRepository;
 import java.util.Collections;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.example.demoapi.model;
+package com.example.demoapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

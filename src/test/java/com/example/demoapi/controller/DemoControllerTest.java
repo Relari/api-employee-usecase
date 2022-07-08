@@ -6,7 +6,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
-import com.example.demoapi.model.Demo;
+import com.example.demoapi.model.domain.Demo;
 import com.example.demoapi.service.DemoService;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
