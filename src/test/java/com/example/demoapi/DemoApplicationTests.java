@@ -55,7 +55,7 @@ class DemoApplicationTests {
 	@Test
 	void createDemoTest() throws Exception {
 
-		var demo = new Demo(1, "Demo 1");
+		var demo = new Demo(1, "Demo");
 
 		mockMvc.perform(post(baseUrl)
 						.contentType(MediaType.APPLICATION_JSON)
@@ -63,6 +63,19 @@ class DemoApplicationTests {
 				)
 				.andDo(print())
 				.andExpect(status().isCreated());
+	}
+
+	@Test
+	void createDemoButIsBadRequestTest() throws Exception {
+
+		var demo = new Demo(1, "Demo Test");
+
+		mockMvc.perform(post(baseUrl)
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(demo))
+				)
+				.andDo(print())
+				.andExpect(status().isBadRequest());
 	}
 
 	@Test
