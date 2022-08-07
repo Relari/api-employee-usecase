@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Class: DemoController.
  * @version 1.0.0
@@ -42,7 +44,7 @@ public class DemoController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveDemo(@RequestBody Demo demo) {
+    public void saveDemo(@RequestBody @Valid Demo demo) {
         demoService.save(demo);
     }
 
