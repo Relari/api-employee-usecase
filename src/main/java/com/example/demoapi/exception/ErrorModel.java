@@ -11,6 +11,9 @@ public class ErrorModel {
     @JsonProperty("app-name")
     private String applicationName;
 
+    @JsonProperty("status")
+    private int status;
+
     @JsonProperty("error-message")
     private String message;
 
