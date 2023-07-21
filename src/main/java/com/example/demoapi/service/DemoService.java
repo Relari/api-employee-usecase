@@ -1,6 +1,7 @@
 package com.example.demoapi.service;
 
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
+import com.example.demoapi.model.domain.DemoResponse;
 
 import java.util.List;
 
@@ -12,9 +13,9 @@ import java.util.List;
 
 public interface DemoService {
 
-    void save(Demo demo);
-    List<Demo> getDemos();
-    Demo findDemo(Integer id);
+    void save(DemoRequest demoRequest);
+    List<DemoResponse> getDemos();
+    DemoResponse findDemo(Integer id);
     void deleteDemo(Integer id);
 
 }

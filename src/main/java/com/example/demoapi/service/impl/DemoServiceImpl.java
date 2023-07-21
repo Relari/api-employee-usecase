@@ -1,11 +1,11 @@
 package com.example.demoapi.service.impl;
 
 import com.example.demoapi.exception.DemoNotFoundException;
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
+import com.example.demoapi.model.domain.DemoResponse;
 import com.example.demoapi.model.entity.DemoEntity;
 import com.example.demoapi.repository.DemoRepository;
 import com.example.demoapi.service.DemoService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -19,43 +19,40 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@AllArgsConstructor
-public class DemoServiceImpl implements DemoService {
+public record DemoServiceImpl(DemoRepository demoRepository) implements DemoService {
 
-    private final DemoRepository demoRepository;
-
-    public void save(Demo demo) {
-        log.debug("Save Demo");
+    public void save(DemoRequest demoRequest) {
+        log.debug("Save DemoRequest");
         demoRepository.save(
-                new DemoEntity(null, demo.getDescription())
+                new DemoEntity(null, demoRequest.getDescription())
         );
     }
 
-    public List<Demo> getDemos() {
+    public List<DemoResponse> getDemos() {
         log.debug("Get Demos");
         return demoRepository.findAll()
                 .stream()
-                .map(this::mapDemo)
+                .map(this::mapDemoResponse)
                 .collect(Collectors.toList());
     }
 
-    private Demo mapDemo(DemoEntity demoEntity) {
-        return new Demo(demoEntity.getId(), demoEntity.getDescription());
+    private DemoResponse mapDemoResponse(DemoEntity demoEntity) {
+        return new DemoResponse(demoEntity.getId(), demoEntity.getDescription());
     }
 
-    public Demo findDemo(Integer id) {
-        log.debug("Find Demo By Id = {}", id);
+    public DemoResponse findDemo(Integer id) {
+        log.debug("Find DemoRequest By Id = {}", id);
         return demoRepository.findById(id)
-                .map(this::mapDemo)
-                .orElseThrow(() -> new DemoNotFoundException("Demo Not Found"));
+                .map(this::mapDemoResponse)
+                .orElseThrow(() -> new DemoNotFoundException("DemoRequest Not Found"));
     }
 
     public void deleteDemo(Integer id) {
-        log.debug("Delete Demo By Id = {}", id);
+        log.debug("Delete DemoRequest By Id = {}", id);
 
-        Demo demo = findDemo(id);
+        DemoResponse demoRequest = findDemo(id);
 
-        demoRepository.deleteById(demo.getId());
+        demoRepository.deleteById(demoRequest.id());
 
     }
 }

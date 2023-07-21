@@ -1,9 +1,9 @@
 package com.example.demoapi.controller;
 
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
+import com.example.demoapi.model.domain.DemoResponse;
 import com.example.demoapi.service.DemoService;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 /**
  * Class: DemoController.
@@ -23,38 +23,35 @@ import javax.validation.Valid;
  */
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(path = "${application.api.path}")
-public class DemoController {
-
-    private DemoService demoService;
+public record DemoController(DemoService demoService) {
 
     /**
      * getDemos.
-     * @return {@link Demo[]}
+     * @return {@link DemoResponse[]}
      */
     @GetMapping
-    public List<Demo> getDemos() {
+    public List<DemoResponse> getDemos() {
         return demoService.getDemos();
     }
 
     /**
      * saveDemo.
-     * @param demo {@link Demo}
+     * @param demoRequest {@link DemoRequest}
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveDemo(@RequestBody @Valid Demo demo) {
-        demoService.save(demo);
+    public void saveDemo(@RequestBody @Valid DemoRequest demoRequest) {
+        demoService.save(demoRequest);
     }
 
     /**
      * findDemoById.
      * @param id {@link Integer}
-     * @return {@link Demo}
+     * @return {@link DemoResponse}
      */
     @GetMapping(path = "/{id}")
-    public Demo findDemoById(@PathVariable("id") Integer id) {
+    public DemoResponse findDemoById(@PathVariable("id") Integer id) {
         return demoService.findDemo(id);
     }
 
