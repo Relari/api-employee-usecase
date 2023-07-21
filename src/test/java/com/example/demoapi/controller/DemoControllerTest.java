@@ -6,7 +6,8 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
+import com.example.demoapi.model.domain.DemoResponse;
 import com.example.demoapi.service.DemoService;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,15 +38,15 @@ class DemoControllerTest {
     @Test
     void getDemos() {
 
-        var demo = new Demo(1, "Demo 1");
+        var demo = new DemoResponse(1, "Demo 1");
 
         when(demoService.getDemos())
                 .thenReturn(Collections.singletonList(demo));
 
         var demos = demoController.getDemos();
 
-        assertEquals(demo.getId(), demos.get(0).getId());
-        assertEquals(demo.getDescription(), demos.get(0).getDescription());
+        assertEquals(demo.id(), demos.get(0).id());
+        assertEquals(demo.description(), demos.get(0).description());
 
     }
 
@@ -54,7 +55,7 @@ class DemoControllerTest {
 
         demoService.save(any());
 
-        var demo = new Demo(1, "Demo 1");
+        var demo = new DemoRequest("Demo 1");
 
         demoController.saveDemo(demo);
 
@@ -64,15 +65,15 @@ class DemoControllerTest {
     @Test
     void findDemoById() {
 
-        var demo = new Demo(1, "Demo 1");
+        var demo = new DemoResponse(1, "Demo 1");
 
         when(demoService.findDemo(anyInt()))
                 .thenReturn(demo);
 
         var demoResponse = demoController.findDemoById(1);
 
-        assertEquals(demo.getId(), demoResponse.getId());
-        assertEquals(demo.getDescription(), demoResponse.getDescription());
+        assertEquals(demo.id(), demoResponse.id());
+        assertEquals(demo.description(), demoResponse.description());
 
     }
 
@@ -81,9 +82,9 @@ class DemoControllerTest {
 
         demoService.deleteDemo(anyInt());
 
-        var demo = new Demo(1, "Demo 1");
+        var demo = new DemoResponse(1, "Demo 1");
 
-        demoController.deleteDemoById(demo.getId());
+        demoController.deleteDemoById(demo.id());
 
         assertNotNull(demo);
 

@@ -8,7 +8,7 @@ import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.when;
 
 import com.example.demoapi.exception.DemoNotFoundException;
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
 import com.example.demoapi.model.entity.DemoEntity;
 import com.example.demoapi.repository.DemoRepository;
 import java.util.Collections;
@@ -46,11 +46,10 @@ class DemoServiceImplTest {
         when(demoRepository.save(any()))
                 .thenReturn(demoEntity);
 
-        var demo = new Demo(1, "Demo 1");
+        var demo = new DemoRequest("Demo 1");
 
         demoService.save(demo);
 
-        assertEquals(demo.getId(), demoEntity.getId());
         assertEquals(demo.getDescription(), demoEntity.getDescription());
 
     }
@@ -63,12 +62,10 @@ class DemoServiceImplTest {
         when(demoRepository.findAll())
                 .thenReturn(Collections.singletonList(demoEntity));
 
-        var demo = new Demo(1, "Demo 1");
-
         var demos = demoService.getDemos();
 
-        assertEquals(demo.getId(), demos.get(0).getId());
-        assertEquals(demo.getDescription(), demos.get(0).getDescription());
+        assertEquals(demoEntity.getId(), demos.get(0).id());
+        assertEquals(demoEntity.getDescription(), demos.get(0).description());
 
     }
 
@@ -82,8 +79,8 @@ class DemoServiceImplTest {
 
         var demo = demoService.findDemo(1);
 
-        assertEquals(demo.getId(), demoEntity.getId());
-        assertEquals(demo.getDescription(), demoEntity.getDescription());
+        assertEquals(demo.id(), demoEntity.getId());
+        assertEquals(demo.description(), demoEntity.getDescription());
 
     }
 

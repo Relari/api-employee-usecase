@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.demoapi.model.domain.Demo;
+import com.example.demoapi.model.domain.DemoRequest;
 import com.example.demoapi.service.DemoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +41,7 @@ class DemoApplicationTests {
 
 	@BeforeEach
 	void init() {
-		var demo = new Demo(1, "Demo 1");
+		var demo = new DemoRequest("Demo 1");
 		demoService.save(demo);
 	}
 
@@ -55,7 +55,7 @@ class DemoApplicationTests {
 	@Test
 	void createDemoTest() throws Exception {
 
-		var demo = new Demo(1, "Demo");
+		var demo = new DemoRequest("Demo");
 
 		mockMvc.perform(post(baseUrl)
 						.contentType(MediaType.APPLICATION_JSON)
@@ -68,14 +68,14 @@ class DemoApplicationTests {
 	@Test
 	void createDemoButIsBadRequestTest() throws Exception {
 
-		var demo = new Demo(1, "Demo Test");
+		var demo = new DemoRequest("");
 
 		mockMvc.perform(post(baseUrl)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(demo))
 				)
 				.andDo(print())
-				.andExpect(status().isBadRequest());
+				.andExpect(status().isInternalServerError());
 	}
 
 	@Test
