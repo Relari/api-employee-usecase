@@ -33,7 +33,7 @@ public record DemoServiceImpl(DemoRepository demoRepository) implements DemoServ
         return demoRepository.findAll()
                 .stream()
                 .map(this::mapDemoResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private DemoResponse mapDemoResponse(DemoEntity demoEntity) {
