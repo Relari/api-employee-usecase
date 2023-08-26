@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
  */
 
 @Entity
-@Table(name = "DemoRequest")
+@Table(name = "Demo")
 
 @Data
 @NoArgsConstructor
