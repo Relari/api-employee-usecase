@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ControllerAdvice
 public class ErrorHandler {
@@ -37,4 +41,15 @@ public class ErrorHandler {
                 ));
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorModel> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        List<String> parameters= new ArrayList<>();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(error ->
+                        parameters.add("Field = " + error.getField() + ", Message = " + error.getDefaultMessage())
+                );
+        return buildError(
+                HttpStatus.BAD_REQUEST, parameters.size() == 1 ? parameters.get(0) : "Texto Invalido"
+        );
+    }
 }
