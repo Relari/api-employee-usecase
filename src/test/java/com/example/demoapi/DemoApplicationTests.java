@@ -75,7 +75,7 @@ class DemoApplicationTests {
 						.content(objectMapper.writeValueAsString(demo))
 				)
 				.andDo(print())
-				.andExpect(status().isInternalServerError());
+				.andExpect(status().isBadRequest());
 	}
 
 	@Test
