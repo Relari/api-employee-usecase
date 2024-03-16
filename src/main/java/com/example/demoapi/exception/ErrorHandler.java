@@ -1,7 +1,6 @@
 package com.example.demoapi.exception;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,7 +17,7 @@ public class ErrorHandler {
     private String applicationName;
 
     @ExceptionHandler(DemoNotFoundException.class)
-    public HttpEntity<ErrorModel> demoNotFoundException(
+    public ResponseEntity<ErrorModel> demoNotFoundException(
             DemoNotFoundException e) {
         return buildError(
                 HttpStatus.NOT_FOUND, e.getMessage()
@@ -26,7 +25,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public HttpEntity<ErrorModel> exception(Exception e) {
+    public ResponseEntity<ErrorModel> exception(Exception e) {
         return buildError(
                 HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()
         );
