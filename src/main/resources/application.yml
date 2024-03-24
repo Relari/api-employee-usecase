@@ -19,10 +19,22 @@ spring:
 
 application:
   api:
-    path: '/api/v1/demos'
-  http-client:
-    jwt-token:
-      base-url: 'http://localhost:8080/auth/jwt/v1/'
+    path: '/api/v1/employees'
+  info:
+    name: '@project.name@'
+    version: '@project.version@'
+    description: '@project.description@'
+  backend:
+    errors:
+      EMPLOYEE_NOT_SAVE:
+        description: 'Error al guardar al empleado.'
+        category: INTERNAL_ERROR
+      EMPLOYEE_NOT_FOUND:
+        description: 'Empleado no encontrado.'
+        category: NOT_FOUND
+      EMPLOYEE_NOT_UPDATE:
+        description: 'Error al actualizar al empleado.'
+        category: INTERNAL_ERROR
 
 server:
   port: 8081
@@ -32,4 +44,4 @@ server:
     include-message: always
 
 logging.level:
-  com.example.demoapi: DEBUG
+  com.pe.employee: DEBUG
